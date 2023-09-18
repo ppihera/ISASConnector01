@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entry.cs" />
     <Compile Include="ErrorDTO.cs" />
     <Compile Include="IRESHelper.cs" />
     <Compile Include="MainViewModel.cs" />

@@ -1,6 +1,7 @@
 ﻿using IsasConnectorBase;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -59,18 +60,21 @@ namespace ISASWPFInterfaceFW
                 // split fileContent to array of strings by new line
                 string[] lines = fileContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
-                List<List<string>> entries = new List<List<string>>();
+                List<Entry> entries = new List<Entry>();
                 List<string> keys = new List<string>();
+                viewModel.Errors = new System.Collections.ObjectModel.ObservableCollection<ErrorDTO>();
 
+                int lineCounter = 0;
                 foreach (string line in lines)
                 {
+                    lineCounter++;
                     if (keys.Count == 0)
                     {
                         keys = line.Split(';').Select(x => x.Replace("NDB_ATRIBUT", "ATRIBUT")).ToList();
                     }
                     else
                     {
-                        List<string> entry = new List<string>();
+                        Entry entry = new Entry() { Index = lineCounter};
 
                         // split line to array of strings by semicomma
                         string[] columns = line.Split(';');
@@ -83,20 +87,20 @@ namespace ISASWPFInterfaceFW
                             {
                                 if (column is null)
                                 {
-                                    entry.Add("NULL");
+                                    entry.Columns.Add("NULL");
                                 }
                                 //test if column is numeric
                                 else if (int.TryParse(column, out int n))
                                 {
                                     // if column is numeric, add it to list
-                                    entry.Add(column);
+                                    entry.Columns.Add(column);
                                 }
                                 else
                                 {
                                     // if column is not numeric, add it to list with quotes
-                                    entry.Add($"'{column.GetAtribut()}'");
+                                    entry.Columns.Add($"'{column.GetAtribut()}'");
                                 }
-                                if (entry.Count == keys.Count) entries.Add(entry);
+                                if (entry.Columns.Count == keys.Count) entries.Add(entry);
                             }
                         }
                     }
@@ -105,7 +109,7 @@ namespace ISASWPFInterfaceFW
                 int counter = 0;
                 foreach (var entry in entries)
                 {
-                    string query = $"INSERT INTO CCAR_DOPLNENI_PAR_UDAJE ({String.Join(",", keys)}) VALUES ({String.Join(",", entry)})";
+                    string query = $"INSERT INTO CCAR_DOPLNENI_PAR_UDAJE ({String.Join(",", keys)}) VALUES ({String.Join(",", entry.Columns)})";
 
                     try
                     {
@@ -124,7 +128,8 @@ namespace ISASWPFInterfaceFW
                         viewModel.Errors.Add(
                             new ErrorDTO()
                             {
-                                Fields = entry,
+                                Fields = entry.Columns,
+                                Index = entry.Index,
                                 Message = ex.Message
                             });
                     }

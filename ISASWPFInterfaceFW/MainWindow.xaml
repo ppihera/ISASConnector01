@@ -5,34 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ISASWPFInterfaceFW"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="20">
-        <StackPanel Background="WhiteSmoke" Height="Auto" VerticalAlignment="Top">
-            <StackPanel Margin="5 10">
-                <Label>Databáze:</Label>
-                <TextBox x:Name="TextBoxDatabase" Text="CVICNA"/>
+        Title="IRES - Import" Height="450" Width="800">
 
-                <Label>Uživatelské jméno:</Label>
-                <TextBox x:Name="TextBoxUser" Text=""/>
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <StackPanel Background="WhiteSmoke" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <WrapPanel Margin="30 10"  HorizontalAlignment="left">
 
-                <Label>Heslo:</Label>
-                <PasswordBox x:Name="PasswordBox"/>
+                    <StackPanel Margin="5">
+                        <Label>Databáze:</Label>
+                        <TextBox x:Name="TextBoxDatabase" Text="CVICNA" MinWidth="200"/>
+                    </StackPanel>
 
-                <!--<Label>Role (formuláře):</Label>
-                <PasswordBox x:Name="TextBoxRoles"/>-->
+                    <StackPanel Margin="5">
+                        <Label>Uživatelské jméno:</Label>
+                        <TextBox x:Name="TextBoxUser" Text="" MinWidth="200"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="5">
+                        <Label>Heslo:</Label>
+                        <PasswordBox x:Name="PasswordBox" MinWidth="200"/>
+                    </StackPanel>
+
+                   
+
+                    <!--<Label>Role (formuláře):</Label>
+             <PasswordBox x:Name="TextBoxRoles"/>-->
+
+                    <Button Padding="5 2" x:Name="ButtonConnect" Content="Zvolit soubor a nahrát do databáze" Click="ButtonConnect_Click" Margin="10"/>
                 
-                <Button x:Name="ButtonConnect" Content="Zvolit soubor a nahrát do databáze" Click="ButtonConnect_Click" Margin="10"/>
+                </WrapPanel>
             </StackPanel>
 
-            <ItemsControl ItemsSource="{Binding Errors}">
+            <Grid Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Řádek:"/>
+                <TextBlock Grid.Column="1" Text="Chyba:"/>
+            </Grid>
+
+            <ItemsControl ItemsSource="{Binding Errors}" Margin="20">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Message}"/>
+                        <Grid Margin="0 0 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Index}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Message}"/>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            
-            
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
+   
 </Window>

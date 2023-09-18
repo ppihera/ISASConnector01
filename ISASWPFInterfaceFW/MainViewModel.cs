@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ISASWPFInterfaceFW
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
-        public List<ErrorDTO> Errors { get; set; } = new List<ErrorDTO>();
+        public ObservableCollection<ErrorDTO> Errors { get; set; } = new ObservableCollection<ErrorDTO>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
