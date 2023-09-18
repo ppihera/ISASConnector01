@@ -26,12 +26,11 @@ namespace ISASConnectorFW
             List<List<string>> entries = new List<List<string>>();
             List<string> keys = new List<string>();
 
-
             foreach (string line in lines)
             {
                 if (keys.Count == 0)
                 {
-                    keys = line.Split(';').ToList();
+                    keys = line.Split(';').Select(x => x.Replace("NDB_ATRIBUT", "ATRIBUT")).ToList();
                 }
                 else
                 {
@@ -39,64 +38,74 @@ namespace ISASConnectorFW
 
                     // split line to array of strings by semicomma
                     string[] columns = line.Split(';');
+
+                    int columnCounter = 0;
                     foreach (string column in columns)
                     {
-                        if (column is null)
+                        columnCounter++;
+                        if(columnCounter <= keys.Count)
                         {
-                            entry.Add("");
+                            if (column is null)
+                            {
+                                entry.Add("NULL");
+                            }
+                            //test if column is numeric
+                            else if (int.TryParse(column, out int n))
+                            {
+                                // if column is numeric, add it to list
+                                entry.Add(column);
+                            }
+                            else
+                            {
+                                // if column is not numeric, add it to list with quotes
+                                entry.Add($"'{column.GetAtribut()}'");
+                            }
+                            if (entry.Count == keys.Count) entries.Add(entry);
                         }
-                        //test if column is numeric
-                        else if (int.TryParse(column, out int n))
-                        {
-                            // if column is numeric, add it to list
-                            entry.Add(column);
-                        }
-                        else
-                        {
-                            // if column is not numeric, add it to list with quotes
-                            entry.Add($"'{column}'");
-                        }
-                        entries.Add(entry);
                     }
                 }
             }
 
-            string keysCompiled = "";
-            foreach (string key in keys)
-            {
-                keysCompiled += $"{key},";
-            }
-            keysCompiled = keysCompiled.Trim(',');
+            List<string> errorMessages = new List<string>();
+            int counter = 0;
 
-            string valuesCompiled = "";
-            foreach (List<string> entry in entries)
+            foreach(var entry in entries)
             {
-                if(entry.Count == keys.Count)
+                string query = $"INSERT INTO CCAR_DOPLNENI_PAR_UDAJE ({String.Join(",", keys)}) VALUES ({String.Join(",",entry)})";
+
+               try
                 {
-                    string values = "";
-                    foreach (string column in entry)
+                    var result = service.GetOutput(new InputDTO()
                     {
-                        values += $"{column},";
-                    }
-                    valuesCompiled += $"({values.Trim(',')}),";
+                        DatabaseName = "CVICNA",
+                        UserName = "pihepa",
+                        Password = "Tajne.heslo.3333",
+                        Roles = "CCASP_FUU069F",
+                        SqlQuery = query
+                    });
+                    counter++;
+                }
+                catch (Exception ex)
+                {
+                    errorMessages.Add(ex.Message);
                 }
             }
-            valuesCompiled = valuesCompiled.Trim(',');
 
-            string query = $"INSERT INTO CCAR_DOPLNENI_PAR_UDAJE ({keysCompiled}) VALUES ({valuesCompiled})";
 
-            //string query = Queries.test02;
+            Console.WriteLine($"Úspěšně importováno {counter} záznamů. {errorMessages.Count} záznamů se importovat nepodařilo.");
 
-            var result = service.GetOutput(new InputDTO()
-            {
-                DatabaseName = "CVICNA",
-                UserName = "pihepa",
-                Password = "Tajne.heslo.3333",
-                Roles = "CCASP_FUU069F",
-                SqlQuery = query
-            });
+            //string queryCLR = Queries.test02;
 
-            Console.WriteLine(result.Records.Count);
+            //var result = service.GetOutput(new InputDTO()
+            //{
+            //    DatabaseName = "CVICNA",
+            //    UserName = "pihepa",
+            //    Password = "Tajne.heslo.3333",
+            //    Roles = "CCASP_FUU069F",
+            //    SqlQuery = queryCLR
+            //});
+
+            //Console.WriteLine(result.Records.Count);
             Console.ReadLine();
         }
     }

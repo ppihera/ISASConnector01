@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System;
+using ADODB;
 
 namespace IsasConnectorBase
 {
@@ -23,35 +24,39 @@ namespace IsasConnectorBase
             ADODB.Recordset recordset = DB.Execute(inputDTO.SqlQuery, out object ret, 0);
             OutputDTO output = new OutputDTO(inputDTO);
             int counter = 0;
-            while (!recordset.EOF)
+
+            if(recordset.State == 1)
             {
-                RecordDTO recordDTO = new RecordDTO() { Index = counter };
-                var fields = ((dynamic)recordset).Fields;
-                for (int i = 0; i < fields.Count; i++)
+                while (!recordset.EOF)
                 {
-                    dynamic field = fields[i];
-
-                    string keyString = "";
-                    string valueString = "";
-
-                    try
+                    RecordDTO recordDTO = new RecordDTO() { Index = counter };
+                    var fields = ((dynamic)recordset).Fields;
+                    for (int i = 0; i < fields.Count; i++)
                     {
-                        keyString = field.Name.ToString();
-                    }
-                    catch { }
+                        dynamic field = fields[i];
 
-                    try
-                    {
-                        valueString = field.Value.ToString();
-                    }
-                    catch { }
+                        string keyString = "";
+                        string valueString = "";
 
-                    FieldDTR fieldDTR = new FieldDTR() { Key = keyString, Value = valueString };
-                    recordDTO.Fields.Add(fieldDTR);
-                    counter++;
+                        try
+                        {
+                            keyString = field.Name.ToString();
+                        }
+                        catch { }
+
+                        try
+                        {
+                            valueString = field.Value.ToString();
+                        }
+                        catch { }
+
+                        FieldDTR fieldDTR = new FieldDTR() { Key = keyString, Value = valueString };
+                        recordDTO.Fields.Add(fieldDTR);
+                        counter++;
+                    }
+                    output.Records.Add(recordDTO);
+                    recordset.MoveNext();
                 }
-                output.Records.Add(recordDTO);
-                recordset.MoveNext();
             }
 
             DB.Close();

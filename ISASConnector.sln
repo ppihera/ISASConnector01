@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISASConnectorFW", "ISASConn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsasConnectorBase", "IsasConnectorBase\IsasConnectorBase.csproj", "{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISASWPFInterfaceFW", "ISASWPFInterfaceFW\ISASWPFInterfaceFW.csproj", "{C3878E30-5AA6-4F29-94E9-0093365494CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3878E30-5AA6-4F29-94E9-0093365494CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3878E30-5AA6-4F29-94E9-0093365494CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3878E30-5AA6-4F29-94E9-0093365494CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3878E30-5AA6-4F29-94E9-0093365494CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
