@@ -10,7 +10,7 @@
         <StackPanel Background="WhiteSmoke" Height="Auto" VerticalAlignment="Top">
             <StackPanel Margin="5 10">
                 <Label>Databáze:</Label>
-                <TextBox x:Name="TextBoxLogin" Text="CVICNA"/>
+                <TextBox x:Name="TextBoxDatabase" Text="CVICNA"/>
 
                 <Label>Uživatelské jméno:</Label>
                 <TextBox x:Name="TextBoxUser" Text=""/>
@@ -20,9 +20,17 @@
 
                 <!--<Label>Role (formuláře):</Label>
                 <PasswordBox x:Name="TextBoxRoles"/>-->
+                
+                <Button x:Name="ButtonConnect" Content="Zvolit soubor a nahrát do databáze" Click="ButtonConnect_Click" Margin="10"/>
             </StackPanel>
 
-            
+            <ItemsControl ItemsSource="{Binding Errors}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Message}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             
             
         </StackPanel>
