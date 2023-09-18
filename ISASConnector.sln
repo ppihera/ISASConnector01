@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISASConnectorFW", "ISASConnectorFW\ISASConnectorFW.csproj", "{704AF0A4-DBAE-46C1-86E2-D001E45A24F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsasConnectorBase", "IsasConnectorBase\IsasConnectorBase.csproj", "{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{704AF0A4-DBAE-46C1-86E2-D001E45A24F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704AF0A4-DBAE-46C1-86E2-D001E45A24F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704AF0A4-DBAE-46C1-86E2-D001E45A24F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704AF0A4-DBAE-46C1-86E2-D001E45A24F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29AEF2E-D2F4-489E-8585-0C839A6A83E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {436CD248-86DE-4F5A-A06F-C53E71BEE89A}
+	EndGlobalSection
+EndGlobal

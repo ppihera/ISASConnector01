@@ -1,0 +1,2 @@
+delete
+from CCAR_DOPLNENI_PAR_UDAJE
