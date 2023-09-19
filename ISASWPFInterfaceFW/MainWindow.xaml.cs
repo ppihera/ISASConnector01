@@ -1,8 +1,10 @@
 ﻿using IsasConnectorBase;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 
@@ -143,6 +145,27 @@ namespace ISASWPFInterfaceFW
         private void ButtonConnect_Click(object sender, RoutedEventArgs e)
         {
             UploadFromFile();
+        }
+
+        private void ButtonClr_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var result = isasService.GetOutput(new InputDTO()
+                {
+                    DatabaseName = this.TextBoxDatabase.Text,
+                    UserName = "pihepa",
+                    Password = "Tajne.heslo.3333",
+                    Roles = "CCASP_FUU069F",
+                    SqlQuery = "delete from CCAR_DOPLNENI_PAR_UDAJE"
+                });
+
+                MessageBox.Show("Hotovo. Tabulka byla vymazána.", "Smazání celé tabulky", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Chyba při komunikaci s databází:", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
     }
 }

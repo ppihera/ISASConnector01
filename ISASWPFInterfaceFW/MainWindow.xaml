@@ -31,9 +31,12 @@
 
                     <!--<Label>Role (formuláře):</Label>
              <PasswordBox x:Name="TextBoxRoles"/>-->
-
+                   
+                    
+                </WrapPanel>
+                <WrapPanel>
                     <Button Padding="5 2" x:Name="ButtonConnect" Content="Zvolit soubor a nahrát do databáze" Click="ButtonConnect_Click" Margin="10"/>
-                
+                    <Button Padding="5,2" x:Name="ButtonClr" Content="Vymazat tabulku v DB" Click="ButtonClr_Click" Margin="10"/>
                 </WrapPanel>
             </StackPanel>
 
