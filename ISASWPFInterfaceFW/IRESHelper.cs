@@ -28,5 +28,25 @@ namespace ISASWPFInterfaceFW
                 default: return ndbAtribut;
             }
         }
+
+        /// ze vstupního stringu odstaní všechny znaky předcházející dvojtečce
+        internal static string RemovePrefix(this string input)
+        {
+            int index = input.IndexOf(':');
+            if (index > 0)
+                return input.Substring(index + 1).Trim(new char[] {':', ' '});
+            else
+                return input;
+        }
+
+        /// ze vstupního stringu vrátí první řádek
+        internal static string GetFirstLine(this string input)
+        {
+            int index = input.IndexOf(Environment.NewLine);
+            if (index > 0)
+                return input.Substring(0, index);
+            else
+                return input;
+        }
     }
 }
