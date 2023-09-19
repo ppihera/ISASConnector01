@@ -132,7 +132,7 @@ namespace ISASWPFInterfaceFW
                             {
                                 Fields = entry.Columns,
                                 Index = entry.Index,
-                                Message = ex.Message
+                                Message = ex.Message.Replace("[Microsoft][ODBC driver for Oracle][Oracle]ORA-20000: FUA002P-01: ", "")
                             });
                     }
                 }
