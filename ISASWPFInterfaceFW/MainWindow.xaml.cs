@@ -167,5 +167,36 @@ namespace ISASWPFInterfaceFW
                 MessageBox.Show(ex.Message, "Chyba při komunikaci s databází:", MessageBoxButton.OK, MessageBoxImage.Stop);
             }
         }
+
+        private void ButtonExport_Click(object sender, RoutedEventArgs e)
+        {
+            Export();
+        }
+
+        void Export()
+        {
+            // Export viewmodel.Errors to csv file
+            StringBuilder sb = new StringBuilder();
+            foreach (var error in viewModel.Errors)
+            {
+                sb.AppendLine($"{String.Join(";", error.Fields)};{error.Message}");
+            }
+            // Save sb.ToString() to file with SaveFileDialog
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Errors"; // Default file name
+            dlg.DefaultExt = ".csv"; // Default file extension
+            dlg.Filter = "CSV documents (.csv)|*.csv"; // Filter files by extension
+
+            // Show save file dialog box
+            bool? fileResult = dlg.ShowDialog();
+            if (fileResult == true)
+            {
+                // Get the selected file name and display in a TextBox
+                string filename = dlg.FileName;
+
+                // write sb.ToString() to file
+                System.IO.File.WriteAllText(filename, sb.ToString(), Encoding.GetEncoding(1250));
+            }
+        }
     }
 }

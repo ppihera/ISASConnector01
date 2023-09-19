@@ -8,7 +8,7 @@
         Title="IRES - Import" Height="450" Width="800">
 
     <ScrollViewer>
-        <StackPanel Margin="20">
+        <StackPanel Margin="0 0 0 20">
             <StackPanel Background="WhiteSmoke" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <WrapPanel Margin="30 10"  HorizontalAlignment="left">
 
@@ -35,12 +35,13 @@
                     
                 </WrapPanel>
                 <WrapPanel>
-                    <Button Padding="5 2" x:Name="ButtonConnect" Content="Zvolit soubor a nahrát do databáze" Click="ButtonConnect_Click" Margin="10"/>
-                    <Button Padding="5,2" x:Name="ButtonClr" Content="Vymazat tabulku v DB" Click="ButtonClr_Click" Margin="10"/>
+                    <Button Padding="5 2" x:Name="ButtonConnect" Content="Zvolit soubor a nahrát do databáze" Click="ButtonConnect_Click" Margin="5"/>
+                    <Button Padding="5,2" x:Name="ButtonClr" Content="Vymazat tabulku v DB" Click="ButtonClr_Click" Margin="5"/>
+                    <Button Padding="5,2" x:Name="ButtonExport" Content="Exportovat" Click="ButtonExport_Click" Margin="5"/>
                 </WrapPanel>
             </StackPanel>
 
-            <Grid Margin="0 20 0 0">
+            <Grid Margin="5 10 5 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
@@ -52,7 +53,7 @@
             <ItemsControl ItemsSource="{Binding Errors}" Margin="20">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0 0 0 5">
+                        <Grid Margin="5 0 5 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition/>
