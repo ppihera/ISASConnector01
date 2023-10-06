@@ -19,12 +19,12 @@
 
                     <StackPanel Margin="5">
                         <Label>Uživatelské jméno:</Label>
-                        <TextBox x:Name="TextBoxUser" Text="" MinWidth="200"/>
+                        <TextBox x:Name="TextBoxUser" Text="pihepa" MinWidth="200"/>
                     </StackPanel>
 
                     <StackPanel Margin="5">
                         <Label>Heslo:</Label>
-                        <PasswordBox x:Name="PasswordBox" MinWidth="200"/>
+                        <PasswordBox x:Name="PasswordBox" Password="Tajne.heslo.3333" MinWidth="200"/>
                     </StackPanel>
 
                    

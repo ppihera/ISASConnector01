@@ -11,6 +11,7 @@ namespace ISASWPFInterfaceFW
     internal class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<ErrorDTO> Errors { get; set; } = new ObservableCollection<ErrorDTO>();
+        public List<string> Keys { get; set; } = new List<string>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

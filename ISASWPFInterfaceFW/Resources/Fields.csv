@@ -1,0 +1,65 @@
+Faktura;DOKLAD;Rok;ROK
+Faktura;DOKLAD;Dokladová øada;DOKL_RADA
+Faktura;DOKLAD;Èíslo dokladu;CISLO_DOKLADU
+Faktura;DOKLAD;Variabilní symbol;VAR_SYMBOL
+Faktura;DOKLAD;Konstantní symbol;KONST_SYMBOL
+Faktura;DOKLAD;Specifický symbol;SPEC_SYMBOL
+Faktura;DOKLAD;Rok smlouvy;ROK_SML
+Faktura;DOKLAD;Èíslo smlouvy;CISLO_SML
+Faktura;DOKLAD;Èíslo položky smlouvy;CISLO_POLOZKY_SML
+Faktura;DOKLAD;Osoba/firma;OSOBA
+Faktura položka;DOKLAD_POLOZKA;Objekt;DOKLAD_POLOZKA
+Finanèní párování;FINANCNI_PAROVANI;Rok Z/P;DOKL_RADA_ZAV_POHL
+Finanèní párování;FINANCNI_PAROVANI;Dokladová øada Z/P;ROK_ZAV_POHL
+Finanèní párování;FINANCNI_PAROVANI;Èíslo dokladu Z/P;CIS_DOKL_ZAV_POHL
+Finanèní párování;FINANCNI_PAROVANI;Èíslo splátky Z/P;CIS_SPLATKY_ZAV_POHL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Variabilní symbol;SPECIFICKY_SYMBOL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Konstantní symbol;ROK_POKL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Specifický symbol;DOKL_RADA_POKL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Rok pokl.;EVID_CISLO_POKL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Dokladová øada pokl.;VARIABILNI_SYMBOL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Èíslo pokl.;KONST_SYMBOL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Èíslo položky pokl.;CISLO_POL_POKL
+Bankovní výpis;BANKOVNI_VYPIS_POLOZKY;Osoba/firma;OSOBA
+Pokladní doklad;POKLADNI_DOKLAD;Rok;ROK
+Pokladní doklad;POKLADNI_DOKLAD;Dokladová øada;DOKL_RADA
+Pokladní doklad;POKLADNI_DOKLAD;Èíslo dokladu;EVID_CISLO
+Pokladní doklad;POKLADNI_DOKLAD;Èíslo položky;CISLO_POLOZKY
+Pokladní doklad;POKLADNI_DOKLAD;Osobní èíslo;OSOBNI_CISLO
+Vazba na doklad;PAROVANI_DOKLADU;Rok;ROK
+Vazba na doklad;PAROVANI_DOKLADU;Dokladová øada;DOKL_RADA
+Vazba na doklad;PAROVANI_DOKLADU;Èíslo dokladu;CISLO_DOKLADU
+Vazba na doklad;PAROVANI_DOKLADU;Èíslo položky;CISLO_POLOZKY
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Rok;ROK
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Dokladová øada;DOKL_RADA
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Èíslo dokladu;CISLO_DOKLADU
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Èíslo splátky;CISLO_SPLATKY
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Variabilní symbol;VAR_SYMBOL
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Konstantní symbol;KONST_SYMBOL
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Specifický symbol;SPEC_SYMBOL
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Rok smlouvy;ROK_SML
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Èíslo smlouvy;CISLO_SML
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Èíslo položky smlouvy;CISLO_POLOZKY_SML
+Závazek/Pohledávka;ZAVAZEK_POHLEDAVKA;Osoba/firma;OSOBA
+Úhrada;UHRADA;Rok Z/P;ROK
+Úhrada;UHRADA;Dokladová øada Z/P;DOKL_RADA
+Úhrada;UHRADA;Èíslo dokladu Z/P;CISLO_DOKLADU
+Úhrada;UHRADA;Èíslo splátky Z/P;CISLO_SPLATKY
+Pøíjemka / Výdejka zás.;SKLADOVY_DOKLAD_ZASOB;Rok;ROK
+Pøíjemka / Výdejka zás.;SKLADOVY_DOKLAD_ZASOB;Dokladová øada;DOKL_RADA
+Pøíjemka / Výdejka zás.;SKLADOVY_DOKLAD_ZASOB;Èíslo dokladu;CISLO_DOKLADU
+Pøíjemka / Výdejka zás.;SKLADOVY_DOKLAD_ZASOB;Rok smlouvy;ROK_SML
+Pøíjemka / Výdejka zás.;SKLADOVY_DOKLAD_ZASOB;Èíslo smlouvy;CISLO_SML
+Pøíjemka / Výdejka zás.;SKLADOVY_DOKLAD_ZASOB;Èíslo položky smlouvy;CISLO_POLOZKY_SML
+Pohyb majetku;POHYB_MAJETKU;Rok smlouvy;ROK_SML
+Pohyb majetku;POHYB_MAJETKU;Èíslo smlouvy;CISLO_SML
+Pohyb majetku;POHYB_MAJETKU;Èíslo položky smlouvy;CISLO_POLOZKY_SML
+Pár. zál. a zúè. dokladù;PAR_ZALOHOVYCH_DOKL;Rok Z/P;ROK_PAR
+Pár. zál. a zúè. dokladù;PAR_ZALOHOVYCH_DOKL;Dokladová øada Z/P;DOKL_RADA_PAR
+Pár. zál. a zúè. dokladù;PAR_ZALOHOVYCH_DOKL;Èíslo dokladu Z/P;CISLO_DOKLADU_PAR
+Pár. dohadných dokladù        ;PAR_DOHADNYCH_DOKL;Rok Z/P;ROK_PAR
+Pár. dohadných dokladù        ;PAR_DOHADNYCH_DOKL;Dokladová øada Z/P;DOKL_RADA_PAR
+Pár. dohadných dokladù        ;PAR_DOHADNYCH_DOKL;Èíslo dokladu Z/P;CISLO_DOKLADU_PAR
+Cizí peníze      ;CIZI_PENIZE;Rok Z/P;ROK_POHL
+Cizí peníze      ;CIZI_PENIZE;Dokladová øada Z/P;DOKL_RADA_POHL
+Cizí peníze      ;CIZI_PENIZE;Èíslo dokladu Z/P;CISLO_DOKLADU_POHL

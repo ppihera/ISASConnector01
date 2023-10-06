@@ -56,8 +56,17 @@ namespace ISASWPFInterfaceFW
                 // Get the selected file name and display in a TextBox
                 string filename = dlg.FileName;
 
+                string fileContent = null;
                 // read file to string
-                string fileContent = System.IO.File.ReadAllText(filename, Encoding.GetEncoding(1250));
+                try
+                {
+                    fileContent = System.IO.File.ReadAllText(filename, Encoding.GetEncoding(1250));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
 
                 // split fileContent to array of strings by new line
                 string[] lines = fileContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
@@ -67,12 +76,22 @@ namespace ISASWPFInterfaceFW
                 viewModel.Errors = new System.Collections.ObjectModel.ObservableCollection<ErrorDTO>();
 
                 int lineCounter = 0;
+                int attributeIndex = 0;
+                int tableIndex = 0;
+
                 foreach (string line in lines)
                 {
                     lineCounter++;
                     if (keys.Count == 0)
                     {
                         keys = line.Split(';').Select(x => x.Replace("NDB_ATRIBUT", "ATRIBUT")).ToList();
+                        int i = 0;
+                        foreach(string key in keys)
+                        {
+                            if (key.Fix().Contains("tabulka")) tableIndex = i;
+                            if (key.Fix().Contains("atribut")) attributeIndex = i;
+                            i++;
+                        }
                     }
                     else
                     {
@@ -80,31 +99,52 @@ namespace ISASWPFInterfaceFW
 
                         // split line to array of strings by semicomma
                         string[] columns = line.Split(';');
-
-                        int columnCounter = 0;
-                        foreach (string column in columns)
+                        
+                        if(columns.Count() >= keys.Count)
                         {
-                            columnCounter++;
-                            if (columnCounter <= keys.Count)
+                            string attribute = columns[attributeIndex];
+                            string table = columns[tableIndex];
+
+                            AttributeDTO attributeDTO = new AttributeDTO() { ColInput = attribute, TableInput = table };
+                            attributeDTO = attributeDTO.FixAttribute();
+
+                            if (attributeDTO == null) continue;
+
+                            int columnCounter = 0;
+                            foreach (string column in columns)
                             {
-                                if (column is null)
+                            
+                                if (columnCounter < keys.Count)
                                 {
-                                    entry.Columns.Add("NULL");
+                                    if(columnCounter == attributeIndex)
+                                    {
+                                        entry.Columns.Add($"'{attributeDTO.AtributOutput}'");
+                                    }
+                                    else if (columnCounter == tableIndex)
+                                    {
+                                        entry.Columns.Add($"'{attributeDTO.TableInput}'");
+                                    }
+                                    else if (column is null)
+                                    {
+                                        entry.Columns.Add("NULL");
+                                    }
+                                    //test if column is numeric
+                                    else if (!column.StartsWith("0") && int.TryParse(column, out int n))
+                                    {
+                                        // if column is numeric, add it to list
+                                        entry.Columns.Add(column);
+                                    }
+                                    else
+                                    {
+                                        // if column is not numeric, add it to list with quotes
+                                        entry.Columns.Add($"'{column.GetAtribut()}'");
+                                    }
+                                    if (entry.Columns.Count == keys.Count) entries.Add(entry);
                                 }
-                                //test if column is numeric
-                                else if (int.TryParse(column, out int n))
-                                {
-                                    // if column is numeric, add it to list
-                                    entry.Columns.Add(column);
-                                }
-                                else
-                                {
-                                    // if column is not numeric, add it to list with quotes
-                                    entry.Columns.Add($"'{column.GetAtribut()}'");
-                                }
-                                if (entry.Columns.Count == keys.Count) entries.Add(entry);
+                                columnCounter++;
                             }
                         }
+                       
                     }
                 }
 
@@ -118,8 +158,8 @@ namespace ISASWPFInterfaceFW
                         var result = isasService.GetOutput(new InputDTO()
                         {
                             DatabaseName = this.TextBoxDatabase.Text,
-                            UserName = "pihepa",
-                            Password = "Tajne.heslo.3333",
+                            UserName = this.TextBoxUser.Text,
+                            Password = this.PasswordBox.Password,
                             Roles = "CCASP_FUU069F",
                             SqlQuery = query
                         });
@@ -134,9 +174,15 @@ namespace ISASWPFInterfaceFW
                                 Index = entry.Index,
                                 Message = ex.Message.RemovePrefix().GetFirstLine()
                             });
+
+                        if(viewModel.Errors.Count == 1)
+                        {
+                            if (MessageBox.Show($"Databáze ohlásila chybu: {ex.Message}.\nChcete pokračovat?", "Chyba", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) break;
+                        }
                     }
                 }
-
+                viewModel.Keys = keys;
+          
                 MessageBox.Show($"Úspěšně importováno {counter} záznamů. {viewModel.Errors.Count} záznamů se importovat nepodařilo.");
                 viewModel.OnPropertyChanged("Errors");
             }
@@ -154,8 +200,8 @@ namespace ISASWPFInterfaceFW
                 var result = isasService.GetOutput(new InputDTO()
                 {
                     DatabaseName = this.TextBoxDatabase.Text,
-                    UserName = "pihepa",
-                    Password = "Tajne.heslo.3333",
+                    UserName = this.TextBoxUser.Text,
+                    Password = this.PasswordBox.Password,
                     Roles = "CCASP_FUU069F",
                     SqlQuery = "delete from CCAR_DOPLNENI_PAR_UDAJE"
                 });
@@ -177,13 +223,15 @@ namespace ISASWPFInterfaceFW
         {
             // Export viewmodel.Errors to csv file
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine(String.Join(";", viewModel.Keys));
+
             foreach (var error in viewModel.Errors)
             {
                 sb.AppendLine($"{String.Join(";", error.Fields)};{error.Message}");
             }
             // Save sb.ToString() to file with SaveFileDialog
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Errors"; // Default file name
+            dlg.FileName = "Chyby"; // Default file name
             dlg.DefaultExt = ".csv"; // Default file extension
             dlg.Filter = "CSV documents (.csv)|*.csv"; // Filter files by extension
 
@@ -195,8 +243,17 @@ namespace ISASWPFInterfaceFW
                 string filename = dlg.FileName;
 
                 // write sb.ToString() to file
-                System.IO.File.WriteAllText(filename, sb.ToString(), Encoding.GetEncoding(1250));
+                try
+                {
+                    System.IO.File.WriteAllText(filename, sb.ToString().Replace("'", ""), Encoding.GetEncoding(1250));
+                    MessageBox.Show("Hotovo. Soubor byl uložen.", "Export záznamů o chybě", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Chyba při ukládání souboru:", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
+              
         }
     }
 }
