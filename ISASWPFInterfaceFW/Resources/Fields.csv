@@ -1,6 +1,6 @@
 Faktura;DOKLAD;Rok;ROK
 Faktura;DOKLAD;Dokladová øada;DOKL_RADA
-Faktura;DOKLAD;Èíslo dokladu;CISLO_DOKLADU
+Faktura;DOKLAD;Èíslo dokladu;EVID_CISLO
 Faktura;DOKLAD;Variabilní symbol;VAR_SYMBOL
 Faktura;DOKLAD;Konstantní symbol;KONST_SYMBOL
 Faktura;DOKLAD;Specifický symbol;SPEC_SYMBOL

@@ -63,7 +63,7 @@ namespace ISASWPFInterfaceFW {
         /// <summary>
         ///   Looks up a localized string similar to Faktura;DOKLAD;Rok;ROK
         ///Faktura;DOKLAD;Dokladová řada;DOKL_RADA
-        ///Faktura;DOKLAD;Číslo dokladu;CISLO_DOKLADU
+        ///Faktura;DOKLAD;Číslo dokladu;EVID_CISLO
         ///Faktura;DOKLAD;Variabilní symbol;VAR_SYMBOL
         ///Faktura;DOKLAD;Konstantní symbol;KONST_SYMBOL
         ///Faktura;DOKLAD;Specifický symbol;SPEC_SYMBOL
@@ -72,7 +72,7 @@ namespace ISASWPFInterfaceFW {
         ///Faktura;DOKLAD;Číslo položky smlouvy;CISLO_POLOZKY_SML
         ///Faktura;DOKLAD;Osoba/firma;OSOBA
         ///Faktura položka;DOKLAD_POLOZKA;Objekt;DOKLAD_POLOZKA
-        ///Finanční párování;FINANCNI_PAROVANI;Rok Z/P;D [rest of string was truncated]&quot;;.
+        ///Finanční párování;FINANCNI_PAROVANI;Rok Z/P;DOKL [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Fields {
             get {
